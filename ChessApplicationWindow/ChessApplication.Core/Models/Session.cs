@@ -10,7 +10,10 @@ namespace ChessApplication.Core.Models
     }
     public class Session : ISession
     {
-        List<IFigure> figures1 = new List<IFigure>();
+        public User UserWhite { get; set; }
+        public User UserBlack { get; set; }
+        public BattleField Battlefield { get; set; }
+        
         public void Setup()
         {
             //figures1.Add(new Rook(1, "A", 1));
