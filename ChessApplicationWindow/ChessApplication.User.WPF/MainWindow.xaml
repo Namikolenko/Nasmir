@@ -9,9 +9,17 @@
     <Grid>
         <Image Grid.Column="0" Grid.Row="1" Source="Resources/ChessDesk.jpg" />
         <Label x:Name="StatusLabel" Grid.Row="0" Margin="7" FontSize="15" Grid.ColumnSpan="2"></Label>
-        <Button x:Name="A1Button" Grid.Column="0" Grid.Row="1" Margin="50,475,491,34" Visibility="Visible">
-            <Image Source="Resources/WhitePawn.png" />
-        </Button>
+
+        <Button x:Name="A1Button" Grid.Column="0" Grid.Row="1" Margin="49,475,486,34" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="A2Button" Grid.Column="0" Grid.Row="1" Margin="114,475,425,34" Visibility="Visible" FontSize="50" Background="White"></Button>
+        <Button x:Name="A3Button" Grid.Column="0" Grid.Row="1" Margin="175,475,363,34" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="A4Button" HorizontalAlignment="Left" Margin="237,475,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="White"/>
+        <Button x:Name="A5Button" Grid.Column="0" Grid.Row="1" Margin="300,475,236,34" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="A6Button" Grid.Column="0" Grid.Row="1" Margin="364,475,174,34" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="A7Button" Grid.Column="0" Grid.Row="1" Margin="426,475,112,34" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="A8Button" Grid.Column="0" Grid.Row="1" Margin="488,475,47,34" Visibility="Visible" FontSize="50" Background="white"></Button>
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />

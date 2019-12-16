@@ -50,6 +50,8 @@ namespace ChessApplication.User.WPF
                 StatusLabel.Content = "You are black!";
             else
                 StatusLabel.Content = "You are white!";
+            //A1Button.Background = default;
+            //A1Button.Background = new ImageBrush(new Image);
         }
     }
 }
