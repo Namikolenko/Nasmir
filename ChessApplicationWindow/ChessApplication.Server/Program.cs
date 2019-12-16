@@ -31,8 +31,8 @@ namespace ChessApplication.Server
                 NetworkStream streamWhite = users[0].GetStream(); // Set streamwriters
                 NetworkStream streamBlack = users[1].GetStream();
 
-                string messWhite = "Success! you are white!";
-                string messBlack = "Success! you are black!";
+                string messWhite = "white";
+                string messBlack = "black";
 
                 data = Encoding.UTF8.GetBytes(messWhite); // Sending approval message
                 streamWhite.Write(data, 0, data.Length);

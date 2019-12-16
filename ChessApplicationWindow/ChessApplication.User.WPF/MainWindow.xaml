@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessApplication.User.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="630" Width="800">
     <Grid>
-        
+        <Image Grid.Column="0" Grid.Row="1" Source="Resources/ChessDesk.jpg" />
+        <Label x:Name="StatusLabel" Grid.Row="0" Margin="7" FontSize="15" Grid.ColumnSpan="2"></Label>
+        <Button x:Name="A1Button" Grid.Column="0" Grid.Row="1" Margin="50,475,491,34" Visibility="Visible">
+            <Image Source="Resources/WhitePawn.png" />
+        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
     </Grid>
 </Window>
