@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessApplication.Core.Models
 {
-    class Figure
+    class FigureOnSquare
     {
     }
 }
