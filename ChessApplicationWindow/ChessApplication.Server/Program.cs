@@ -40,9 +40,11 @@ namespace ChessApplication.Server
                 data = Encoding.UTF8.GetBytes(messBlack);
                 streamBlack.Write(data, 0, data.Length);
 
+                StringBuilder builderWhite = new StringBuilder();
+                StringBuilder builderBlack = new StringBuilder();
+
                 while (true)  // Dialog between white and black
                 {
-                    StringBuilder builderWhite = new StringBuilder();
                     int bytes = 0;
                     do
                     {
@@ -50,8 +52,7 @@ namespace ChessApplication.Server
                         builderWhite.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
                     while (streamWhite.DataAvailable);
-
-                    StringBuilder builderBlack = new StringBuilder();
+                    
                     do
                     {
                         bytes = streamBlack.Read(data, 0, data.Length);
