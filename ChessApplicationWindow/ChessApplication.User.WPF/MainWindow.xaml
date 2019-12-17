@@ -19,6 +19,68 @@
         <Button x:Name="A7Button" Grid.Column="0" Grid.Row="1" Margin="426,475,112,34" Visibility="Visible" FontSize="50" Background="black"></Button>
         <Button x:Name="A8Button" Grid.Column="0" Grid.Row="1" Margin="488,475,47,34" Visibility="Visible" FontSize="50" Background="white"></Button>
 
+        <Button x:Name="B1Button" Grid.Column="0" Grid.Row="1" Margin="49,411,486,94" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="B2Button" Grid.Column="0" Grid.Row="1" Margin="114,411,425,94" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="B3Button" Grid.Column="0" Grid.Row="1" Margin="175,411,363,94" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="B4Button" HorizontalAlignment="Left" Margin="237,411,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="black"/>
+        <Button x:Name="B5Button" Grid.Column="0" Grid.Row="1" Margin="300,411,236,94" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="B6Button" Grid.Column="0" Grid.Row="1" Margin="364,411,174,94" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="B7Button" Grid.Column="0" Grid.Row="1" Margin="426,411,112,94" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="B8Button" Grid.Column="0" Grid.Row="1" Margin="488,411,47,94" Visibility="Visible" FontSize="50" Background="black"></Button>
+
+        <Button x:Name="C1Button" Grid.Column="0" Grid.Row="1" Margin="49,348,486,158" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="C2Button" Grid.Column="0" Grid.Row="1" Margin="114,348,425,158" Visibility="Visible" FontSize="50" Background="White"></Button>
+        <Button x:Name="C3Button" Grid.Column="0" Grid.Row="1" Margin="175,348,363,158" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="C4Button" HorizontalAlignment="Left" Margin="237,348,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="White"/>
+        <Button x:Name="C5Button" Grid.Column="0" Grid.Row="1" Margin="300,348,236,158" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="C6Button" Grid.Column="0" Grid.Row="1" Margin="364,348,174,158" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="C7Button" Grid.Column="0" Grid.Row="1" Margin="426,348,112,158" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="C8Button" Grid.Column="0" Grid.Row="1" Margin="488,348,47,158" Visibility="Visible" FontSize="50" Background="white"></Button>
+
+        <Button x:Name="D1Button" Grid.Column="0" Grid.Row="1" Margin="49,283,486,221" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="D2Button" Grid.Column="0" Grid.Row="1" Margin="114,283,425,221" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="D3Button" Grid.Column="0" Grid.Row="1" Margin="175,283,363,221" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="D4Button" HorizontalAlignment="Left" Margin="237,283,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="black"/>
+        <Button x:Name="D5Button" Grid.Column="0" Grid.Row="1" Margin="300,283,236,221" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="D6Button" Grid.Column="0" Grid.Row="1" Margin="364,283,174,221" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="D7Button" Grid.Column="0" Grid.Row="1" Margin="426,283,112,221" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="D8Button" Grid.Column="0" Grid.Row="1" Margin="488,283,47,221" Visibility="Visible" FontSize="50" Background="black"></Button>
+
+        <Button x:Name="E1Button" Grid.Column="0" Grid.Row="1" Margin="49,219,486,286" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="E2Button" Grid.Column="0" Grid.Row="1" Margin="114,219,425,286" Visibility="Visible" FontSize="50" Background="White"></Button>
+        <Button x:Name="E3Button" Grid.Column="0" Grid.Row="1" Margin="175,219,363,286" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="E4Button" HorizontalAlignment="Left" Margin="237,219,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="White"/>
+        <Button x:Name="E5Button" Grid.Column="0" Grid.Row="1" Margin="300,219,236,286" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="E6Button" Grid.Column="0" Grid.Row="1" Margin="364,219,174,286" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="E7Button" Grid.Column="0" Grid.Row="1" Margin="426,219,112,286" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="E8Button" Grid.Column="0" Grid.Row="1" Margin="488,219,47,286" Visibility="Visible" FontSize="50" Background="white"></Button>
+
+        <Button x:Name="F1Button" Grid.Column="0" Grid.Row="1" Margin="49,158,486,350" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="F2Button" Grid.Column="0" Grid.Row="1" Margin="114,158,425,350" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="F3Button" Grid.Column="0" Grid.Row="1" Margin="175,158,363,350" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="F4Button" HorizontalAlignment="Left" Margin="237,158,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="black"/>
+        <Button x:Name="F5Button" Grid.Column="0" Grid.Row="1" Margin="300,158,236,350" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="F6Button" Grid.Column="0" Grid.Row="1" Margin="364,158,174,350" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="F7Button" Grid.Column="0" Grid.Row="1" Margin="426,158,112,350" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="F8Button" Grid.Column="0" Grid.Row="1" Margin="488,158,47,350" Visibility="Visible" FontSize="50" Background="black"></Button>
+
+        <Button x:Name="G1Button" Grid.Column="0" Grid.Row="1" Margin="49,94,486,411" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="G2Button" Grid.Column="0" Grid.Row="1" Margin="114,94,425,411" Visibility="Visible" FontSize="50" Background="White"></Button>
+        <Button x:Name="G3Button" Grid.Column="0" Grid.Row="1" Margin="175,94,363,411" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="G4Button" HorizontalAlignment="Left" Margin="237,94,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="White"/>
+        <Button x:Name="G5Button" Grid.Column="0" Grid.Row="1" Margin="300,94,236,411" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="G6Button" Grid.Column="0" Grid.Row="1" Margin="364,94,174,411" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="G7Button" Grid.Column="0" Grid.Row="1" Margin="426,94,112,411" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="G8Button" Grid.Column="0" Grid.Row="1" Margin="488,94,47,411" Visibility="Visible" FontSize="50" Background="white"></Button>
+
+        <Button x:Name="H1Button" Grid.Column="0" Grid.Row="1" Margin="49,31,486,475" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="H2Button" Grid.Column="0" Grid.Row="1" Margin="114,31,425,475" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="H3Button" Grid.Column="0" Grid.Row="1" Margin="175,31,363,475" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="H4Button" HorizontalAlignment="Left" Margin="237,31,0,0" Grid.Row="1" VerticalAlignment="Top" Width="63" Height="60" Background="black"/>
+        <Button x:Name="H5Button" Grid.Column="0" Grid.Row="1" Margin="300,31,236,475" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="H6Button" Grid.Column="0" Grid.Row="1" Margin="364,31,174,475" Visibility="Visible" FontSize="50" Background="black"></Button>
+        <Button x:Name="H7Button" Grid.Column="0" Grid.Row="1" Margin="426,31,112,475" Visibility="Visible" FontSize="50" Background="white"></Button>
+        <Button x:Name="H8Button" Grid.Column="0" Grid.Row="1" Margin="488,31,47,475" Visibility="Visible" FontSize="50" Background="black"></Button>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
