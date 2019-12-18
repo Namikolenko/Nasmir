@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessApplication.Core.Models
 {
-    class Chess
+    public class Chess
     {
         public string fen;
         Board board;

@@ -107,5 +107,11 @@
   <ItemGroup>
     <Resource Include="Resources\WhitePawn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChessApplication.Core\ChessApplication.Core.csproj">
+      <Project>{DBBD9A6E-4912-4670-A6BF-76FBA874D1AA}</Project>
+      <Name>ChessApplication.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
