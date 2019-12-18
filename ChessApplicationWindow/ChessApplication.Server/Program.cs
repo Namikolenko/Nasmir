@@ -10,7 +10,7 @@ namespace ChessApplication.Server
     {
         static int port = 8888; // Unused port
         static IPAddress localAddr = IPAddress.Parse("25.56.174.87"); // Hamachi IP address
-        static byte[] data = new byte[64]; // Buffer
+        static byte[] data = new byte[4096]; // Buffer
         static void Main(string[] args)
         {
             TcpListener server = null;
@@ -21,6 +21,7 @@ namespace ChessApplication.Server
                 server = new TcpListener(localAddr, port);
                 //START SERVER
                 server.Start();
+                Console.WriteLine("Ожидание подключений...");
 
                 while (users.Count != 2) // Wait for a connection
                 {
@@ -34,11 +35,11 @@ namespace ChessApplication.Server
                 string messWhite = "white";
                 string messBlack = "black";
 
-                data = Encoding.UTF8.GetBytes(messWhite); // Sending approval message
-                streamWhite.Write(data, 0, data.Length);
+                //data = Encoding.Unicode.GetBytes(messWhite); // Sending approval message
+                //streamWhite.Write(data, 0, data.Length);
 
-                data = Encoding.UTF8.GetBytes(messBlack);
-                streamBlack.Write(data, 0, data.Length);
+                //data = Encoding.Unicode.GetBytes(messBlack);
+                //streamBlack.Write(data, 0, data.Length);
 
                 StringBuilder builderWhite = new StringBuilder();
                 StringBuilder builderBlack = new StringBuilder();

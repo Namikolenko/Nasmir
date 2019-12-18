@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,14 +35,14 @@ namespace ChessApplication.User.WPF
 
         int port = 8888; // Unused port
         IPAddress server = IPAddress.Parse("25.56.174.87"); // Hamachi IP address
-        byte[] data = new byte[256]; // Buffer
+        byte[] data = new byte[4096]; // Buffer
         NetworkStream stream;
         StringBuilder response;
         string color = "";
 
         public MainWindow()
         {
-            chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1");
             InitializeComponent();
             drawCoordinates();
             drawBoard();
@@ -50,19 +51,20 @@ namespace ChessApplication.User.WPF
             client.Connect(server, port);
             response = new StringBuilder();
             stream = client.GetStream();
-            int bytes = 0;
-            while(color == "")
-            {
-                do
-                {
-                    bytes = stream.Read(data, 0, data.Length);
-                    response.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                }
-                while (stream.DataAvailable);
-                color = response.ToString();
-            }
-            PlayerColorLabel.Content = "You are ";
-            PlayerColorLabel.Content += color;
+            Thread myThread = new Thread(new ThreadStart(ServerThread));
+            //int bytes = 0;
+            //while(color == "")
+            //{
+            //    do
+            //    {
+            //        bytes = stream.Read(data, 0, data.Length);
+            //        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            //    }
+            //    while (stream.DataAvailable);
+            //    color = response.ToString();
+            //}
+            //PlayerColorLabel.Content = "You are ";
+            //PlayerColorLabel.Content += color;
 
         }
 
@@ -178,16 +180,13 @@ namespace ChessApplication.User.WPF
                 if (allMoves.Contains(madeMove))
                 {
                     //Making a move
-                    //prevButtonContent = prevButton.Content;
-                    //prevButton.Content = pressedButton.Content;
-                    //pressedButton.Content = prevButtonContent;
                     chess = chess.Move(madeMove);
                     figureStender(chess);
                     // Sending to server
-                    byte[] data = Encoding.Unicode.GetBytes(chess.fen);
+                    data = Encoding.Unicode.GetBytes(chess.fen);
                     stream.Write(data, 0, data.Length);
                     // Wait for receiving message
-                    string answer ="";
+                    /*string answer ="";
                     int bytes = 0;
                     while (answer == "")
                     {
@@ -199,8 +198,9 @@ namespace ChessApplication.User.WPF
                         while (stream.DataAvailable);
                         answer = response.ToString();
                     }
-                    chess = chess.Move(answer);
-                    figureStender(chess);
+                    //chess = chess.Move(answer);
+                    figureStender(new Chess(answer));
+                    //pressedButton.Content = answer;*/
                 }
             }
 
@@ -208,6 +208,25 @@ namespace ChessApplication.User.WPF
             if (prevButtonContent != null)
             {
                 prevButton = null;
+            }
+        }
+        private void ServerThread()
+        {
+            while (true)
+            {
+                string answer = "";
+                int bytes = 0;
+                while (answer == "")
+                {
+                    do
+                    {
+                        bytes = stream.Read(data, 0, data.Length);
+                        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (stream.DataAvailable);
+                    answer = response.ToString();
+                }
+                figureStender(new Chess(answer));
             }
         }
     }
