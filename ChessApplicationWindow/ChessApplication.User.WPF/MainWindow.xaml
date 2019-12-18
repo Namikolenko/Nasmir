@@ -12,7 +12,7 @@
         <StackPanel Name="RowNumbersLeft" HorizontalAlignment="Left" Height="480" Margin="29,41,0,0" VerticalAlignment="Top" Width="20"/>
         <WrapPanel Name="ColumnLettersTop" HorizontalAlignment="Left" Height="31" Margin="49,10,0,0" VerticalAlignment="Top" Width="480"/>
         <WrapPanel Name="ColumnLettersDown" HorizontalAlignment="Left" Height="31" Margin="49,521,0,0" VerticalAlignment="Top" Width="480"/>
-        <Label Name="PlayerColorLabel" Content="White" HorizontalAlignment="Left" Margin="662,41,0,0" VerticalAlignment="Top" Width="81"/>
+        <Label Name="PlayerColorLabel" Content="White" HorizontalAlignment="Left" Margin="630,41,0,0" VerticalAlignment="Top" Width="160"/>
 
     </Grid>
 </Window>

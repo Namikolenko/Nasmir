@@ -37,6 +37,7 @@ namespace ChessApplication.User.WPF
         byte[] data = new byte[256]; // Buffer
         NetworkStream stream;
         StringBuilder response;
+        string color = "";
 
         public MainWindow()
         {
@@ -49,6 +50,20 @@ namespace ChessApplication.User.WPF
             client.Connect(server, port);
             response = new StringBuilder();
             stream = client.GetStream();
+            int bytes = 0;
+            while(color == "")
+            {
+                do
+                {
+                    bytes = stream.Read(data, 0, data.Length);
+                    response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                }
+                while (stream.DataAvailable);
+                color = response.ToString();
+            }
+            PlayerColorLabel.Content = "You are ";
+            PlayerColorLabel.Content += color;
+
         }
 
         //private void labelContent(Chess chess)
