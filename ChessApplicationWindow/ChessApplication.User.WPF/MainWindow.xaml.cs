@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,15 +32,23 @@ namespace ChessApplication.User.WPF
 
         public Button[,] BoardCell = new Button[8, 8];
 
+        int port = 8888; // Unused port
+        IPAddress server = IPAddress.Parse("25.56.174.87"); // Hamachi IP address
+        byte[] data = new byte[256]; // Buffer
+        NetworkStream stream;
+        StringBuilder response;
 
         public MainWindow()
         {
-            chess = new Chess();//"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             InitializeComponent();
             drawCoordinates();
             drawBoard();
             figureStender(chess);
-
+            TcpClient client = new TcpClient();
+            client.Connect(server, port);
+            response = new StringBuilder();
+            stream = client.GetStream();
         }
 
         //private void labelContent(Chess chess)
@@ -157,6 +167,24 @@ namespace ChessApplication.User.WPF
                     //prevButton.Content = pressedButton.Content;
                     //pressedButton.Content = prevButtonContent;
                     chess = chess.Move(madeMove);
+                    figureStender(chess);
+                    // Sending to server
+                    byte[] data = Encoding.Unicode.GetBytes(chess.fen);
+                    stream.Write(data, 0, data.Length);
+                    // Wait for receiving message
+                    string answer ="";
+                    int bytes = 0;
+                    while (answer == "")
+                    {
+                        do
+                        {
+                            bytes = stream.Read(data, 0, data.Length);
+                            response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        }
+                        while (stream.DataAvailable);
+                        answer = response.ToString();
+                    }
+                    chess = chess.Move(answer);
                     figureStender(chess);
                 }
             }

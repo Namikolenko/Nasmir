@@ -75,11 +75,11 @@ namespace ChessApplication.Server
             {
                 Console.WriteLine(e.Message);
             }
-            finally
-            {
-                if (server != null)
-                    server.Stop();
-            }
+            //finally
+            //{
+            //    if (server != null)
+            //        server.Stop();
+            //}
         }
     }
 }
