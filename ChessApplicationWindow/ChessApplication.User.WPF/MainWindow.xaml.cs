@@ -38,11 +38,14 @@ namespace ChessApplication.User.WPF
         byte[] data = new byte[4096]; // Buffer
         NetworkStream stream;
         StringBuilder response;
-        string color = "";
+        string color = "black";
+
+        private Action<Chess> messageRecieved;
 
         public MainWindow()
         {
             chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1");
+            Hold();
             InitializeComponent();
             drawCoordinates();
             drawBoard();
@@ -51,7 +54,9 @@ namespace ChessApplication.User.WPF
             client.Connect(server, port);
             response = new StringBuilder();
             stream = client.GetStream();
-            Thread myThread = new Thread(new ThreadStart(ServerThread));
+            //Thread myThread = new Thread(new ThreadStart(ServerThread));
+            //myThread.Start();
+
             //int bytes = 0;
             //while(color == "")
             //{
@@ -65,6 +70,24 @@ namespace ChessApplication.User.WPF
             //}
             //PlayerColorLabel.Content = "You are ";
             //PlayerColorLabel.Content += color;
+
+            if (color == "black")
+            {
+                this.Show();
+                string answer = "";
+                int bytes = 0;
+                while (answer == "")
+                {
+                    do
+                    {
+                        bytes = stream.Read(data, 0, data.Length);
+                        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (stream.DataAvailable);
+                    answer = response.ToString();
+                }
+                figureStender(new Chess(answer));
+            }
 
         }
 
@@ -202,6 +225,19 @@ namespace ChessApplication.User.WPF
                     figureStender(new Chess(answer));
                     //pressedButton.Content = answer;*/
                 }
+                string answer = "";
+                int bytes = 0;
+                while (answer == "")
+                {
+                    do
+                    {
+                        bytes = stream.Read(data, 0, data.Length);
+                        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (stream.DataAvailable);
+                    answer = response.ToString();
+                }
+                figureStender(new Chess(answer));
             }
 
             prevButton = pressedButton;
@@ -209,6 +245,10 @@ namespace ChessApplication.User.WPF
             {
                 prevButton = null;
             }
+        }
+        private async void Hold()
+        {
+            await Task.Run(() => ServerThread());
         }
         private void ServerThread()
         {
