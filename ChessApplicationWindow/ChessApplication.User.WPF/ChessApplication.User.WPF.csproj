@@ -74,12 +74,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OnlineGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PawnUpper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OnlineGameWindow.xaml.cs">
+      <DependentUpon>OnlineGameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PawnUpper.xaml.cs">
       <DependentUpon>PawnUpper.xaml</DependentUpon>
     </Compile>

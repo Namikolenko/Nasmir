@@ -34,9 +34,8 @@ namespace ChessApplication.User.WPF
         }
         private void buttonClickTwo(object sender, EventArgs e)
         {
-            //Kolia you should enter here your window
-            //MainWindow mainwindow = new MainWindow();
-            //mainwindow.Show();
+            OnlineGameWindow onlineWindow = new OnlineGameWindow();
+            onlineWindow.Show();
             this.Close();
         }
     }
