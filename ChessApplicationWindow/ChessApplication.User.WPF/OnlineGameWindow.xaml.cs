@@ -54,6 +54,23 @@ namespace ChessApplication.User.WPF
             response = new StringBuilder();
             stream = client.GetStream();
             RecieveMessage();
+
+            //string answer = "";
+            //int bytes = 0;
+            //while (answer == "")
+            //{
+            //    do
+            //    {
+            //        bytes = stream.Read(data, 0, data.Length);
+            //        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            //    }
+            //    while (stream.DataAvailable);
+            //    answer = response.ToString();
+
+            //}
+            ////Dispatcher.Invoke(() => PlayerColorLabel.Content = answer);
+            //chess = new Chess(answer);
+            //figureStender(chess);
         }
 
         void eatenFiguresFiller()
@@ -158,47 +175,51 @@ namespace ChessApplication.User.WPF
 
         private void figureStender(Chess chess)
         {
-            allMoves = chess.GetAllMoves();
-            //Label content
-            PlayerColorLabel.Content = (chess.fen.Split()[1] == "w" ? "White " : "Black ") + "turn";
-
-            //eatenFiguresRefresher();
-
-            for (int i = 0; i < 8; i++)
+            Dispatcher.Invoke(() =>
             {
-                for (int j = 0; j < 8; j++)
-                {
-                    BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
-                    if (BoardCell[i, j].Content.ToString() != "")
-                    {
-                        //Counting eaten figures
-                        //eatenFigures[BoardCell[i, j].Content.ToString()] -= 1;
+                allMoves = chess.GetAllMoves();
+                //Label content
+                PlayerColorLabel.Content = (chess.fen.Split()[1] == "w" ? "White " : "Black ") + "turn";
 
-                        BoardCell[i, j].Name = BoardCell[i, j].Name.Substring(0, 2) + BoardCell[i, j].Content.ToString();
-                        //Adding an image
-                        Image img = new Image();
-                        string imageLocation = "../chess24/" +
-                            (char.IsUpper(BoardCell[i, j].Content.ToString(), 0) ? "w" : "b") +
-                            BoardCell[i, j].Content.ToString() +
-                            ".png";
-                        img.Source = new BitmapImage(new Uri(@imageLocation, UriKind.Relative));
-                        StackPanel stackPnl = new StackPanel();
-                        stackPnl.Height = BoardCell[i, j].Height;
-                        stackPnl.Width = BoardCell[i, j].Width;
-                        stackPnl.Children.Add(img);
-                        BoardCell[i, j].Content = stackPnl;
-                    }
-                    else
+                //eatenFiguresRefresher();
+
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
                     {
-                        BoardCell[i, j].Content = null;
-                        BoardCell[i, j].Name = BoardCell[i, j].Name.Substring(0, 2);
+                        BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
+                        if (BoardCell[i, j].Content.ToString() != "")
+                        {
+                            //Counting eaten figures
+                            //eatenFigures[BoardCell[i, j].Content.ToString()] -= 1;
+
+                            BoardCell[i, j].Name = BoardCell[i, j].Name.Substring(0, 2) + BoardCell[i, j].Content.ToString();
+                            //Adding an image
+                            Image img = new Image();
+                            string imageLocation = "../chess24/" +
+                                (char.IsUpper(BoardCell[i, j].Content.ToString(), 0) ? "w" : "b") +
+                                BoardCell[i, j].Content.ToString() +
+                                ".png";
+                            img.Source = new BitmapImage(new Uri(@imageLocation, UriKind.Relative));
+                            StackPanel stackPnl = new StackPanel();
+                            stackPnl.Height = BoardCell[i, j].Height;
+                            stackPnl.Width = BoardCell[i, j].Width;
+                            stackPnl.Children.Add(img);
+                            BoardCell[i, j].Content = stackPnl;
+                        }
+                        else
+                        {
+                            BoardCell[i, j].Content = null;
+                            BoardCell[i, j].Name = BoardCell[i, j].Name.Substring(0, 2);
+                        }
                     }
                 }
-            }
-            eatenFiguresShower();
+                eatenFiguresShower();
 
-            if (allMoves.Count() == 0)
-                victory();
+                if (allMoves.Count() == 0)
+                    victory();
+            });
+            
         }
 
         private void victory()
@@ -269,7 +290,23 @@ namespace ChessApplication.User.WPF
                     figureStender(chess);
                     data = Encoding.Unicode.GetBytes(chess.fen);
                     stream.Write(data, 0, data.Length);
-                    
+
+                    string answer = "";
+                    int bytes = 0;
+                    while (answer == "")
+                    {
+                        do
+                        {
+                            bytes = stream.Read(data, 0, data.Length);
+                            response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        }
+                        while (stream.DataAvailable);
+                        answer = response.ToString();
+
+                    }
+                    //Dispatcher.Invoke(() => PlayerColorLabel.Content = answer);
+                    chess = new Chess(answer);
+                    figureStender(chess);
                 }
             }
 

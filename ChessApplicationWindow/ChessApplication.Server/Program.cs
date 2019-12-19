@@ -47,13 +47,19 @@ namespace ChessApplication.Server
                 while (true)  // Dialog between white and black
                 {
                     int bytes = 0;
+                    string messageBlack = "";
+                    string messageWhite = "";
                     do
                     {
                         bytes = streamWhite.Read(data, 0, data.Length);
                         builderWhite.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
                     while (streamWhite.DataAvailable);
-                    
+
+                    messageWhite = builderWhite.ToString();
+                    data = Encoding.Unicode.GetBytes(messageWhite);
+                    streamBlack.Write(data, 0, data.Length);
+
                     do
                     {
                         bytes = streamBlack.Read(data, 0, data.Length);
@@ -61,14 +67,16 @@ namespace ChessApplication.Server
                     }
                     while (streamBlack.DataAvailable);
 
-                    string messageBlack = builderBlack.ToString();
-                    string messageWhite = builderWhite.ToString();
+                    messageBlack = builderBlack.ToString();
+                    
+
+                    if (messageBlack != "" || messageWhite != "")
+                        Console.WriteLine(messageBlack + "||||||" + messageWhite);
 
                     data = Encoding.Unicode.GetBytes(messageBlack);
                     streamWhite.Write(data, 0, data.Length);
 
-                    data = Encoding.Unicode.GetBytes(messageWhite);
-                    streamBlack.Write(data, 0, data.Length);
+                    
                 }
 
             }
