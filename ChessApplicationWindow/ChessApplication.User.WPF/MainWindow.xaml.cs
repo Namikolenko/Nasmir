@@ -163,10 +163,11 @@ namespace ChessApplication.User.WPF
                 for (int j = 0; j < 8; j++)
                 {
                     //BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
-                    BoardCell[i, j].Dispatcher.BeginInvoke(new Action(delegate ()
-                    {
-                        BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
-                    }));
+                    //BoardCell[i, j].Dispatcher.BeginInvoke(new Action(delegate ()
+                    //{
+                    //    BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
+                    //}));
+                    Dispatcher.Invoke(() => BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString());
                 }
             }
         }
@@ -182,10 +183,11 @@ namespace ChessApplication.User.WPF
                 for (int j = 0; j < 8; j++)
                 {
                     //BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque;
-                    BoardCell[i, j].Dispatcher.BeginInvoke(new Action(delegate ()
-                    {
-                        BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque;
-                    }));
+                    //BoardCell[i, j].Dispatcher.BeginInvoke(new Action(delegate ()
+                    //{
+                    //    BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque;
+                    //}));
+                    Dispatcher.Invoke(() => BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque);
                 }
             }
 
