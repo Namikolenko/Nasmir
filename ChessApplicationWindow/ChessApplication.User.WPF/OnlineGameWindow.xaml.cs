@@ -31,12 +31,12 @@ namespace ChessApplication.User.WPF
         Dictionary<string, int> eatenFigures = new Dictionary<string, int>();
 
         public Button[,] BoardCell = new Button[8, 8];
-
-        int port = 8888; // Unused port
-        IPAddress server = IPAddress.Parse("25.56.174.87"); // Hamachi IP address
-        byte[] data = new byte[4096]; // Buffer
+        byte[] data = new byte[256]; // Buffer
         NetworkStream stream;
         StringBuilder response;
+
+        IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("25.56.174.87"), 8888); // Адрес хамачи
+        Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); // создаем сокет
 
         public OnlineGameWindow()
         {
@@ -48,29 +48,9 @@ namespace ChessApplication.User.WPF
             figureStender(chess);
             eatenFiguresFiller();
             eatenFiguresShower();
-
-            TcpClient client = new TcpClient();
-            client.Connect(server, port);
             response = new StringBuilder();
-            stream = client.GetStream();
+            socket.Connect(ipPoint);
             RecieveMessage();
-
-            //string answer = "";
-            //int bytes = 0;
-            //while (answer == "")
-            //{
-            //    do
-            //    {
-            //        bytes = stream.Read(data, 0, data.Length);
-            //        response.Append(Encoding.Unicode.GetString(data, 0, bytes));
-            //    }
-            //    while (stream.DataAvailable);
-            //    answer = response.ToString();
-
-            //}
-            ////Dispatcher.Invoke(() => PlayerColorLabel.Content = answer);
-            //chess = new Chess(answer);
-            //figureStender(chess);
         }
 
         void eatenFiguresFiller()
@@ -190,8 +170,6 @@ namespace ChessApplication.User.WPF
                         BoardCell[i, j].Content = chess.GetFigureAt(j, 7 - i) == '1' ? "" : chess.GetFigureAt(j, 7 - i).ToString();
                         if (BoardCell[i, j].Content.ToString() != "")
                         {
-                            //Counting eaten figures
-                            //eatenFigures[BoardCell[i, j].Content.ToString()] -= 1;
 
                             BoardCell[i, j].Name = BoardCell[i, j].Name.Substring(0, 2) + BoardCell[i, j].Content.ToString();
                             //Adding an image
@@ -289,24 +267,7 @@ namespace ChessApplication.User.WPF
 
                     figureStender(chess);
                     data = Encoding.Unicode.GetBytes(chess.fen);
-                    stream.Write(data, 0, data.Length);
-
-                    string answer = "";
-                    int bytes = 0;
-                    while (answer == "")
-                    {
-                        do
-                        {
-                            bytes = stream.Read(data, 0, data.Length);
-                            response.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                        }
-                        while (stream.DataAvailable);
-                        answer = response.ToString();
-
-                    }
-                    //Dispatcher.Invoke(() => PlayerColorLabel.Content = answer);
-                    chess = new Chess(answer);
-                    figureStender(chess);
+                    socket.Send(data);
                 }
             }
 
@@ -323,20 +284,21 @@ namespace ChessApplication.User.WPF
             {
                 while (true)
                 {
+                    byte[] recdata = new byte[256];
                     string answer = "";
                     int bytes = 0;
+                    response = new StringBuilder();
                     while (answer == "")
                     {
                         do
                         {
-                            bytes = stream.Read(data, 0, data.Length);
-                            response.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                            bytes = socket.Receive(recdata, recdata.Length, 0);
+                            response.Append(Encoding.Unicode.GetString(recdata, 0, bytes));
                         }
-                        while (stream.DataAvailable);
+                        while (socket.Available > 0);
                         answer = response.ToString();
 
                     }
-                    //Dispatcher.Invoke(() => PlayerColorLabel.Content = answer);
                     chess = new Chess(answer);
                     figureStender(chess);
                 }

@@ -8,87 +8,73 @@ namespace ChessApplication.Server
 {
     class Program
     {
-        static int port = 8888; // Unused port
-        static IPAddress localAddr = IPAddress.Parse("25.56.174.87"); // Hamachi IP address
-        static byte[] data = new byte[4096]; // Buffer
+        static int port = 8888; // Порт
         static void Main(string[] args)
         {
-            TcpListener server = null;
-            List<TcpClient> users = new List<TcpClient>();
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("25.56.174.87"), port); // Адрес Хамачи
 
+            // создаем сокет
+            Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
-                server = new TcpListener(localAddr, port);
-                //START SERVER
-                server.Start();
+                listenSocket.Bind(ipPoint);
+                listenSocket.Listen(10);
+
                 Console.WriteLine("Ожидание подключений...");
 
-                while (users.Count != 2) // Wait for a connection
+                List<Socket> users = new List<Socket>();
+
+                while (users.Count != 2)
                 {
-                    TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Подключен клиент.");
-                    users.Add(client);
+                    users.Add(listenSocket.Accept());
+                    Console.WriteLine("New user joined!");
                 }
-                NetworkStream streamWhite = users[0].GetStream(); // Set streamwriters
-                NetworkStream streamBlack = users[1].GetStream();
 
-                string messWhite = "white";
-                string messBlack = "black";
-
-                //data = Encoding.Unicode.GetBytes(messWhite); // Sending approval message
-                //streamWhite.Write(data, 0, data.Length);
-
-                //data = Encoding.Unicode.GetBytes(messBlack);
-                //streamBlack.Write(data, 0, data.Length);
+                Socket white = users[0];
+                Socket black = users[1];
 
                 StringBuilder builderWhite = new StringBuilder();
                 StringBuilder builderBlack = new StringBuilder();
 
-                while (true)  // Dialog between white and black
+                while (true)
                 {
-                    int bytes = 0;
-                    string messageBlack = "";
-                    string messageWhite = "";
+                    int bytes = 0; // количество полученных байтов
+                    byte[] data = new byte[256]; // буфер для получаемых данных
+                    builderBlack.Clear();
+                    builderWhite.Clear();
+
                     do
                     {
-                        bytes = streamWhite.Read(data, 0, data.Length);
+                        bytes = white.Receive(data);
                         builderWhite.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
-                    while (streamWhite.DataAvailable);
+                    while (white.Available > 0);
 
-                    messageWhite = builderWhite.ToString();
+                    string messageWhite = builderWhite.ToString();
                     data = Encoding.Unicode.GetBytes(messageWhite);
-                    streamBlack.Write(data, 0, data.Length);
+                    Console.WriteLine(messageWhite);
+                    black.Send(data);
+
+                    bytes = 0; // количество полученных байтов
+                    data = new byte[256]; // буфер для получаемых данных
 
                     do
                     {
-                        bytes = streamBlack.Read(data, 0, data.Length);
+                        bytes = black.Receive(data);
                         builderBlack.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
-                    while (streamBlack.DataAvailable);
+                    while (black.Available > 0);
 
-                    messageBlack = builderBlack.ToString();
-                    
-
-                    if (messageBlack != "" || messageWhite != "")
-                        Console.WriteLine(messageBlack + "||||||" + messageWhite);
-
+                    string messageBlack = builderBlack.ToString();
                     data = Encoding.Unicode.GetBytes(messageBlack);
-                    streamWhite.Write(data, 0, data.Length);
-
-                    
+                    Console.WriteLine(messageBlack);
+                    white.Send(data);
                 }
-
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(ex.Message);
             }
-            //finally
-            //{
-            //    if (server != null)
-            //        server.Stop();
-            //}
         }
     }
 }
