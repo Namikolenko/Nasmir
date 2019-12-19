@@ -34,6 +34,7 @@ namespace ChessApplication.User.WPF
         }
         private void buttonClickTwo(object sender, EventArgs e)
         {
+            WaitLabel.Content = "Waiting for other player...";
             OnlineGameWindow onlineWindow = new OnlineGameWindow();
             onlineWindow.Show();
             this.Close();

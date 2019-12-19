@@ -18,7 +18,8 @@
         <StackPanel Background="Chocolate" HorizontalAlignment="Left" Height="31" Margin="529,521,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.867,0.607"/>
         <StackPanel Background="Chocolate" HorizontalAlignment="Left" Height="31" Margin="29,10,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.867,0.607"/>
         <StackPanel Name="Test" HorizontalAlignment="Left" Height="100" Margin="677,235,0,0" VerticalAlignment="Top" Width="100"/>
-        <WrapPanel Name="FigureShower" HorizontalAlignment="Left" Background="Chocolate" Height="480" Margin="597,72,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label Content="EatenFigures" Background="Chocolate" HorizontalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Margin="597,46,0,0" VerticalAlignment="Top" Width="180"/>
+        <WrapPanel Name="FigureShower" HorizontalAlignment="Left" Background="Chocolate" Height="447" Margin="597,105,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label Content="EatenFigures" Background="Chocolate" HorizontalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Margin="597,74,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="ColorTextBlock" Background="Chocolate" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="597,41,33,502" Height="28" Width="180"/>
     </Grid>
 </Window>

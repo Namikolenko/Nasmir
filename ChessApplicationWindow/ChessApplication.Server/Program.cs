@@ -27,7 +27,7 @@ namespace ChessApplication.Server
                 while (users.Count != 2)
                 {
                     users.Add(listenSocket.Accept());
-                    Console.WriteLine("New user joined!");
+                    Console.WriteLine("Пользователь подключен.");
                 }
 
                 Socket white = users[0];
@@ -35,6 +35,9 @@ namespace ChessApplication.Server
 
                 StringBuilder builderWhite = new StringBuilder();
                 StringBuilder builderBlack = new StringBuilder();
+
+                black.Send(Encoding.Unicode.GetBytes("b"));
+                white.Send(Encoding.Unicode.GetBytes("w"));
 
                 while (true)
                 {

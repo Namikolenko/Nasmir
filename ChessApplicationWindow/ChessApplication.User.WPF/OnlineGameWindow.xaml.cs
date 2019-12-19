@@ -37,6 +37,7 @@ namespace ChessApplication.User.WPF
 
         IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("25.56.174.87"), 8888); // Адрес хамачи
         Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); // создаем сокет
+        bool flag;
 
         public OnlineGameWindow()
         {
@@ -50,6 +51,31 @@ namespace ChessApplication.User.WPF
             eatenFiguresShower();
             response = new StringBuilder();
             socket.Connect(ipPoint);
+            byte[] colordata = new byte[256];
+            string color = "";
+            int bytes = 0;
+            response = new StringBuilder();
+            while (color == "")
+            {
+                do
+                {
+                    bytes = socket.Receive(colordata, colordata.Length, 0);
+                    response.Append(Encoding.Unicode.GetString(colordata, 0, bytes));
+                }
+                while (socket.Available > 0);
+                color = response.ToString();
+
+            }
+            if (color == "b")
+            {
+                flag = false;
+                ColorTextBlock.Content = "You are black!";
+            }
+            else
+            {
+                flag = true;
+                ColorTextBlock.Content = "You are white!";
+            }
             RecieveMessage();
         }
 
@@ -218,64 +244,68 @@ namespace ChessApplication.User.WPF
         private void ButtonClick(object sender, EventArgs e)
         {
             Button pressedButton = sender as Button;
-
-            //coloring the board
-            for (int i = 0; i < 8; i++)
+            if (flag)
             {
-                for (int j = 0; j < 8; j++)
+                //coloring the board
+                for (int i = 0; i < 8; i++)
                 {
-                    BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque;
-                }
-            }
-
-            //Coloring choosed cell and possible moves
-            if (pressedButton.Content != null)
-            {
-                pressedButton.Background = Brushes.Green;
-                foreach (var cell in BoardCell)
-                {
-                    if (allMoves.Contains(pressedButton.Name[2] + pressedButton.Name.Substring(0, 2) + cell.Name.Substring(0, 2)))
+                    for (int j = 0; j < 8; j++)
                     {
-                        cell.Background = Brushes.GreenYellow;
+                        BoardCell[i, j].Background = (i + j) % 2 == 1 ? Brushes.Chocolate : Brushes.Bisque;
                     }
                 }
-            }
 
-            object prevButtonContent = null;
-
-            if (prevButton != null && prevButton.Content != null)
-            {
-                //Creating a move
-                madeMove = prevButton.Name[2] + prevButton.Name.Substring(0, 2) + pressedButton.Name.Substring(0, 2);
-                if (allMoves.Contains(madeMove))
+                //Coloring choosed cell and possible moves
+                if (pressedButton.Content != null)
                 {
-                    if (pressedButton.Name.Length == 3)
+                    pressedButton.Background = Brushes.Green;
+                    foreach (var cell in BoardCell)
                     {
-                        eatenFigures[pressedButton.Name[2].ToString()] += 1;
+                        if (allMoves.Contains(pressedButton.Name[2] + pressedButton.Name.Substring(0, 2) + cell.Name.Substring(0, 2)))
+                        {
+                            cell.Background = Brushes.GreenYellow;
+                        }
                     }
+                }
 
-                    chess = chess.Move(madeMove);
+                object prevButtonContent = null;
 
-                    string pawnPromotion;
-                    if ((prevButton.Name[2] == 'P' && pressedButton.Name[1] == '8') || (prevButton.Name[2] == 'p' && pressedButton.Name[1] == '1'))
+                if (prevButton != null && prevButton.Content != null)
+                {
+                    //Creating a move
+                    madeMove = prevButton.Name[2] + prevButton.Name.Substring(0, 2) + pressedButton.Name.Substring(0, 2);
+                    if (allMoves.Contains(madeMove))
                     {
-                        PawnUpper pu = new PawnUpper(char.IsUpper(prevButton.Name[2]) ? "w" : "b");
-                        pu.ShowDialog();
-                        pawnPromotion = pu.figureName;
-                        chess = chess.PawnPromotion(pressedButton.Name[0] - 'a', pressedButton.Name[1] - '1', pawnPromotion[0]);
-                    }
+                        if (pressedButton.Name.Length == 3)
+                        {
+                            eatenFigures[pressedButton.Name[2].ToString()] += 1;
+                        }
 
-                    figureStender(chess);
-                    data = Encoding.Unicode.GetBytes(chess.fen);
-                    socket.Send(data);
+                        chess = chess.Move(madeMove);
+
+                        string pawnPromotion;
+                        if ((prevButton.Name[2] == 'P' && pressedButton.Name[1] == '8') || (prevButton.Name[2] == 'p' && pressedButton.Name[1] == '1'))
+                        {
+                            PawnUpper pu = new PawnUpper(char.IsUpper(prevButton.Name[2]) ? "w" : "b");
+                            pu.ShowDialog();
+                            pawnPromotion = pu.figureName;
+                            chess = chess.PawnPromotion(pressedButton.Name[0] - 'a', pressedButton.Name[1] - '1', pawnPromotion[0]);
+                        }
+
+                        figureStender(chess);
+                        data = Encoding.Unicode.GetBytes(chess.fen);
+                        socket.Send(data);
+                        flag = false;
+                    }
+                }
+
+                prevButton = pressedButton;
+                if (prevButtonContent != null)
+                {
+                    prevButton = null;
                 }
             }
-
-            prevButton = pressedButton;
-            if (prevButtonContent != null)
-            {
-                prevButton = null;
-            }
+            
         }
         
         private async void RecieveMessage()
@@ -301,6 +331,7 @@ namespace ChessApplication.User.WPF
                     }
                     chess = new Chess(answer);
                     figureStender(chess);
+                    flag = true;
                 }
             });
         }

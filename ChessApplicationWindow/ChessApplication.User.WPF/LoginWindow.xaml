@@ -19,6 +19,7 @@
             </TextBlock>
         </Button>
         <Label Content="Please, choose the game style" FontWeight="Bold" Foreground="Chocolate" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="17,105,2.6,0" VerticalAlignment="Top" Width="774" RenderTransformOrigin="0.503,-0.247" Height="58"/>
+        <Label Name="WaitLabel" FontWeight="Bold" HorizontalAlignment="Center" Margin="14,344,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="30" Width="768" Height="57"/>
 
 
     </Grid>
