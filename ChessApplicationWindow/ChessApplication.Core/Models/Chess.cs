@@ -39,6 +39,15 @@ namespace ChessApplication.Core.Models
             Figure f = board.GetFigureAt(square);
             return f == Figure.none ? '1' : (char)f;
         }
+        public Chess PawnPromotion(int x, int y, char figureName)
+        {
+            Square square = new Square(x, y);
+            Figure figure = (Figure)figureName;
+
+            Board nextBoard = board.PawnEvolve(square, figure);
+            Chess nextChess = new Chess(nextBoard);
+            return nextChess;
+        }
         void FindAllMoves()
         {
             allMoves = new List<FigureMoving>();

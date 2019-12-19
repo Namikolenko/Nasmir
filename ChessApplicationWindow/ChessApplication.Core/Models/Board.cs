@@ -78,6 +78,13 @@ namespace ChessApplication.Core.Models
             if (square.OnBoard())
                 figures[square.x, square.y] = figure;
         }
+        public Board PawnEvolve(Square square, Figure figure)
+        {
+            Board next = new Board(fen);
+            next.SetFigureAt(square, figure);
+            next.GenerateFEN();
+            return next;
+        }
         public Board Move(FigureMoving fm)
         {
             Board next = new Board(fen);

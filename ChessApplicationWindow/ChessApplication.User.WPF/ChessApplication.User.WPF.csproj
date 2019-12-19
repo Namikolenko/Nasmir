@@ -74,8 +74,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PawnUpper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PawnUpper.xaml.cs">
+      <DependentUpon>PawnUpper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,16 +109,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ChessDesk.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\WhitePawn.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ChessApplication.Core\ChessApplication.Core.csproj">
       <Project>{DBBD9A6E-4912-4670-A6BF-76FBA874D1AA}</Project>
       <Name>ChessApplication.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="chess24\bB.png" />
+    <Resource Include="chess24\bK.png" />
+    <Resource Include="chess24\bN.png" />
+    <Resource Include="chess24\bP.png" />
+    <Resource Include="chess24\bQ.png" />
+    <Resource Include="chess24\bR.png" />
+    <Resource Include="chess24\wB.png" />
+    <Resource Include="chess24\wK.png" />
+    <Resource Include="chess24\wN.png" />
+    <Resource Include="chess24\wP.png" />
+    <Resource Include="chess24\wQ.png" />
+    <Resource Include="chess24\wR.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

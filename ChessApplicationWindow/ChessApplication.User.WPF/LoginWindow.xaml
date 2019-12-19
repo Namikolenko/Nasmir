@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessApplication.User.WPF"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="450" Width="800" Background="Bisque">
     <Grid>
-        
+        <Label HorizontalContentAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="Chocolate" VerticalContentAlignment="Center" Margin="10,10,0,0" Content="Wellcome to chess application" VerticalAlignment="Top" Height="90" Width="774"/>
+        <Button x:Name="SoloGame" HorizontalAlignment="Left" Margin="276,213,0,0" VerticalAlignment="Top" Width="100" Height="100">
+            <TextBlock>
+            Play on one<LineBreak/><Run xml:space="preserve">  computer</Run>
+            </TextBlock>
+        </Button>
+        <Button x:Name="OnlineGame" HorizontalAlignment="Left" Margin="443,213,0,0" VerticalAlignment="Top" Width="100" Height="100">
+            <TextBlock>
+            Play on separate<LineBreak/><Run xml:space="preserve">    computers</Run>
+            </TextBlock>
+        </Button>
+        <Label Content="Please, choose the game style" FontWeight="Bold" Foreground="Chocolate" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="17,105,2.6,0" VerticalAlignment="Top" Width="774" RenderTransformOrigin="0.503,-0.247" Height="58"/>
+
+
     </Grid>
 </Window>

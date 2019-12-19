@@ -22,6 +22,22 @@ namespace ChessApplication.User.WPF
         public LoginWindow()
         {
             InitializeComponent();
+            SoloGame.Click += buttonClickOne;
+            OnlineGame.Click += buttonClickTwo;
+        }
+
+        private void buttonClickOne(object sender, EventArgs e)
+        {
+            MainWindow mainwindow = new MainWindow();
+            mainwindow.Show();
+            this.Close();
+        }
+        private void buttonClickTwo(object sender, EventArgs e)
+        {
+            //Kolia you should enter here your window
+            //MainWindow mainwindow = new MainWindow();
+            //mainwindow.Show();
+            this.Close();
         }
     }
 }
