@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessApplication.User.WPF"
         mc:Ignorable="d"
-        Title="Online chess match" Height="600" Width="816.253" ResizeMode="NoResize" Foreground="Chocolate" Background="Bisque">
+        Title="Online chess match" Height="600" Width="816.253" ResizeMode="NoResize" Foreground="Chocolate" Background="Bisque" Closing="Window_Closing">
     <Grid>
         <WrapPanel Name="ChessBoard" HorizontalAlignment="Left" Height="480" Margin="49,41,0,0" VerticalAlignment="Top" Width="480"/>
         <StackPanel Name="RowNumbersRight" HorizontalAlignment="Left" Height="480" Margin="529,41,0,0" VerticalAlignment="Top" Width="20"/>
@@ -20,6 +20,6 @@
         <StackPanel Name="Test" HorizontalAlignment="Left" Height="100" Margin="677,235,0,0" VerticalAlignment="Top" Width="100"/>
         <WrapPanel Name="FigureShower" HorizontalAlignment="Left" Background="Chocolate" Height="447" Margin="597,105,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="EatenFigures" Background="Chocolate" HorizontalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Margin="597,74,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label x:Name="ColorTextBlock" Background="Chocolate" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="597,41,33,502" Height="28" Width="180"/>
+        <Label Name="ColorTextBlock" Background="Chocolate" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="597,41,33,502" Height="28" Width="180"/>
     </Grid>
 </Window>

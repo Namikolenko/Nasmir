@@ -22,6 +22,7 @@ namespace ChessApplication.User.WPF
     /// </summary>
     public partial class OnlineGameWindow : Window
     {
+        ServerChat chatWindow;
         public Image chessSprites;
         public Button prevButton;
         string madeMove = "";
@@ -51,6 +52,8 @@ namespace ChessApplication.User.WPF
             eatenFiguresShower();
             response = new StringBuilder();
             socket.Connect(ipPoint);
+            chatWindow = new ServerChat();
+            chatWindow.Show();
             byte[] colordata = new byte[256];
             string color = "";
             int bytes = 0;
@@ -186,6 +189,7 @@ namespace ChessApplication.User.WPF
                 allMoves = chess.GetAllMoves();
                 //Label content
                 PlayerColorLabel.Content = (chess.fen.Split()[1] == "w" ? "White " : "Black ") + "turn";
+                PlayerColorLabel.Foreground = chess.fen.Split()[1] == "w" ? Brushes.White : Brushes.Black;
 
                 //eatenFiguresRefresher();
 
@@ -334,6 +338,11 @@ namespace ChessApplication.User.WPF
                     flag = true;
                 }
             });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            chatWindow.Close();
         }
     }
 }

@@ -143,6 +143,7 @@ namespace ChessApplication.User.WPF
             allMoves = chess.GetAllMoves();
             //Label content
             PlayerColorLabel.Content = (chess.fen.Split()[1] == "w" ? "White " : "Black ") + "turn";
+            PlayerColorLabel.Foreground = chess.fen.Split()[1] == "w" ? Brushes.White : Brushes.Black;
 
             //eatenFiguresRefresher();
 
